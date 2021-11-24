@@ -24,7 +24,7 @@ def main():
     game.title("Around the World with Team 4E")
     game.withdraw()
     welcome = tk.Toplevel(screen)
-    welcome.title("welcome")
+    welcome.title("Welcome")
     gameover = tk.Toplevel(screen)
     gameover.title("Game Over!")
     gameover.withdraw()
@@ -70,7 +70,7 @@ def main():
         nonlocal score
         score = i + 1
         #debug
-        # print(score)
+        #print(score)
         #debug-
         score_count.configure(text=f"Score: {score}")
 
