@@ -25,6 +25,9 @@ def main():
     game.withdraw()
     welcome = tk.Toplevel(screen)
     welcome.title("Welcome")
+    rules = tk.Toplevel(screen)
+    rules.title("Rules")
+    rules.withdraw()
     gameover = tk.Toplevel(screen)
     gameover.title("Game Over!")
     gameover.withdraw()
@@ -51,6 +54,7 @@ def main():
         player_name.configure(text=f"Name: {name}")
         #debug print(name)
         game.deiconify()
+        rules.deiconify()
         welcome.withdraw()
 
     def quit():
@@ -64,6 +68,19 @@ def main():
     exit = tk.Button(welcome, text="exit", command=quit)
     exit.grid(row=99, column=99)
 
+    #* Rules Window
+
+    def openrules():
+        rules.deiconify()
+
+    def closerules():
+        rules.withdraw()
+
+    rule = tk.Label(rules, text="Welcome to Around the World!\n\nIn this game, you will be given a city name; guess the country it belongs to and earn points, get it wrong and lose lives.\nAfter choosing the country it belongs to, tell us if it is its capital or not to earn bonus points!\n(Wrong answers will not lose lives here.)")
+    rule.grid(row=0, column=0, padx=10, pady=20)
+
+    exitrules = tk.Button(rules, text="Close", command=closerules)
+    exitrules.grid(row=1, column=0, padx=10, pady=10)
     #* Game start
 
     def plusscore(i):
@@ -92,17 +109,20 @@ def main():
     player_name.grid(row=2, column=0, padx=2, pady=2)
 
     #debug
-    add_score = tk.Button(game, text="+1 to score", command=lambda *args:plusscore(score))
-    add_score.grid(row=0, column=1, padx=30, pady=30)
+    # add_score = tk.Button(game, text="+1 to score", command=lambda *args:plusscore(score))
+    # add_score.grid(row=0, column=1, padx=30, pady=30)
     #debug-
 
     #debug
-    add_score = tk.Button(game, text="-1 to life", command=lambda *args:minuslife(lives))
-    add_score.grid(row=1, column=1, padx=30, pady=30)
+    # add_score = tk.Button(game, text="-1 to life", command=lambda *args:minuslife(lives))
+    # add_score.grid(row=1, column=1, padx=30, pady=30)
     #debug-
 
-    exit = tk.Button(game, text="exit", command=quit)
-    exit.grid(row=99, column=99)
+    openrule = tk.Button(game, text="Rules", command=openrules)
+    openrule.grid(row=99, column=98)
+
+    exitgame = tk.Button(game, text="Exit", command=quit)
+    exitgame.grid(row=99, column=99)
 
     #* Game Over
 
@@ -117,8 +137,8 @@ def main():
     play_again = tk.Button(gameover, text="Play Again", command=replay)
     play_again.grid(row=1, column=0, padx=10, pady=10)
 
-    exit = tk.Button(gameover, text="Exit", command=quit)
-    exit.grid(row=1, column=1)
+    exitgameover = tk.Button(gameover, text="Exit", command=quit)
+    exitgameover.grid(row=1, column=1)
 
     screen.mainloop()
 
