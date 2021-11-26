@@ -5,7 +5,7 @@ import random
 
 #todo: DICTIONARY 2 where keys = STRINGS country names as on wikipedia (same as 1st dictionary), values = STRINGS of their capitals
 
-#todo: function to randomly pick a key from a dictionary for any length of that dictionary (no hardcoded values; should work on dictionaries with 1 or 8 or 9999 entries) - takes in DICT 1, returns one STRING chosen country
+#todo: function to randomly pick 3 keys from a dictionary, then pick one key from those three keys for any length of that dictionary (no hardcoded values; should work on dictionaries with 1 or 8 or 9999 entries) - takes in DICT 1, returns one STRING chosen country, one LIST OF three STRINGS country options
 
 #todo: function to randomly choose a city from the 1st dictionary with a specified country - takes in DICT 1 and one STRING chosen country, returns one STRING chosen city
 
