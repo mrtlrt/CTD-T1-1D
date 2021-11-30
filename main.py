@@ -2,25 +2,25 @@ import tkinter as tk
 import random
 
 countries_and_cities = {
-		
-	"Australia": ["Melbourne", "Sydney", "Brisbane", "Perth"],
-	"Belgium": ["Brussels", "Beaumont", "Beringen", "Bree"],
-	"Canada": ["Alberta", "British Columbia", "Manitoba", "Ontario"],
-	"Denmark": ["Cophenhagen", "Aarhus", "Odense", "Aalborg"],
-	"Egypt": ["Arish", "Badr", "Cairo", "Dahab"],
-	"France": ["Paris", "Marseille", "Lyon", "Toulouse"],
-	"Germany": ["Berlin", "Munich", "Hamburg", "Frankfurt"],
-	"Hungary": ["Budapest", "Debrecen", "Szeged", "Miskolc"],
-	"India": ["Chennai", "Bangalore", "Delhi", "Hyderabad"],
-	"Japan": ["Tokyo", "Kyoto", "Osaka", "Hiroshima"],
-	"South Korea": ["Seoul", "Busan", "Incheon", "Daegu"],
-	"Laos": ["Vientiane", "Savannakhet", "Pakse", "Phonsavan"],
-	"Malaysia": ["George Town", "Kuala Lumpur", "Johor Bahru", "Shah Alam"],
-	"New Zealand": ["Auckland", "Christchurch", "Wellington", "Hamilton"],
-	"Poland": ["Warsaw", "Krakow", "Gdansk", "Sopot"],
-	"Russia": ["Moscow", "Saint Petersburg", "Sochi", "Kazan"]
+        
+    "Australia": ["Melbourne", "Sydney", "Brisbane", "Perth"],
+    "Belgium": ["Brussels", "Beaumont", "Beringen", "Bree"],
+    "Canada": ["Alberta", "British Columbia", "Manitoba", "Ontario"],
+    "Denmark": ["Cophenhagen", "Aarhus", "Odense", "Aalborg"],
+    "Egypt": ["Arish", "Badr", "Cairo", "Dahab"],
+    "France": ["Paris", "Marseille", "Lyon", "Toulouse"],
+    "Germany": ["Berlin", "Munich", "Hamburg", "Frankfurt"],
+    "Hungary": ["Budapest", "Debrecen", "Szeged", "Miskolc"],
+    "India": ["Chennai", "Bangalore", "Delhi", "Hyderabad"],
+    "Japan": ["Tokyo", "Kyoto", "Osaka", "Hiroshima"],
+    "South Korea": ["Seoul", "Busan", "Incheon", "Daegu"],
+    "Laos": ["Vientiane", "Savannakhet", "Pakse", "Phonsavan"],
+    "Malaysia": ["George Town", "Kuala Lumpur", "Johor Bahru", "Shah Alam"],
+    "New Zealand": ["Auckland", "Christchurch", "Wellington", "Hamilton"],
+    "Poland": ["Warsaw", "Krakow", "Gdansk", "Sopot"],
+    "Russia": ["Moscow", "Saint Petersburg", "Sochi", "Kazan"]
 
-	}
+    }
 
 countries_and_capitals = {
 
