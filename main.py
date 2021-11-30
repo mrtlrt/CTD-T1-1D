@@ -1,9 +1,47 @@
 import tkinter as tk
 import random
 
-#todo: DICTIONARY 1 where keys = STRINGS country names as on wikipedia, values = LISTS OF STRINGS of major city names - at least 15 countries with 4 cities each.
+countries_and_cities = {
+		
+	"Australia": ["Melbourne", "Sydney", "Brisbane", "Perth"],
+	"Belgium": ["Brussels", "Beaumont", "Beringen", "Bree"],
+	"Canada": ["Alberta", "British Columbia", "Manitoba", "Ontario"],
+	"Denmark": ["Cophenhagen", "Aarhus", "Odense", "Aalborg"],
+	"Egypt": ["Arish", "Badr", "Cairo", "Dahab"],
+	"France": ["Paris", "Marseille", "Lyon", "Toulouse"],
+	"Germany": ["Berlin", "Munich", "Hamburg", "Frankfurt"],
+	"Hungary": ["Budapest", "Debrecen", "Szeged", "Miskolc"],
+	"India": ["Chennai", "Bangalore", "Delhi", "Hyderabad"],
+	"Japan": ["Tokyo", "Kyoto", "Osaka", "Hiroshima"],
+	"South Korea": ["Seoul", "Busan", "Incheon", "Daegu"],
+	"Laos": ["Vientiane", "Savannakhet", "Pakse", "Phonsavan"],
+	"Malaysia": ["George Town", "Kuala Lumpur", "Johor Bahru", "Shah Alam"],
+	"New Zealand": ["Auckland", "Christchurch", "Wellington", "Hamilton"],
+	"Poland": ["Warsaw", "Krakow", "Gdansk", "Sopot"],
+	"Russia": ["Moscow", "Saint Petersburg", "Sochi", "Kazan"]
 
-#todo: DICTIONARY 2 where keys = STRINGS country names as on wikipedia (same as 1st dictionary), values = STRINGS of their capitals
+	}
+
+countries_and_capitals = {
+
+    "Australia": "Canberra", 
+    "Belgium": "Brussels", 
+    "Canada": "Ottawa", 
+    "Denmark": "Copenhagen", 
+    "Egypt": "Cairo", 
+    "France": "Paris", 
+    "Germany": "Berlin", 
+    "Hungary": "Budapest", 
+    "India": "New Delhi", 
+    "Japan": "Tokyo", 
+    "South Korea": "Seoul", 
+    "Laos": "Vientiane", 
+    "Malaysia": "Kuala Lumpur", 
+    "New Zealand": "Wellington", 
+    "Poland": "Warsaw", 
+    "Russia": "Moscow"
+    
+    }
 
 #todo: function to randomly pick 3 keys from a dictionary, then pick one key from those three keys for any length of that dictionary (no hardcoded values; should work on dictionaries with 1 or 8 or 9999 entries) - takes in DICT 1, returns one STRING chosen country, one LIST OF three STRINGS country options
 
@@ -76,7 +114,7 @@ def main():
     def closerules():
         rules.withdraw()
 
-    rule = tk.Label(rules, text="Welcome to Around the World!\n\nIn this game, you will be given a city name; guess the country it belongs to and earn points, get it wrong and lose lives.\nAfter choosing the country it belongs to, tell us if it is its capital or not to earn bonus points!\n(Wrong answers will not lose lives here.)")
+    rule = tk.Label(rules, text="Welcome to Around the World!\n\nIn this game, you will be given a city name; guess the country it belongs to and earn points, get it wrong and lose lives.\nAfter choosing the country it belongs to, tell us if it is its capital or not to earn bonus points!)")
     rule.grid(row=0, column=0, padx=10, pady=20)
 
     exitrules = tk.Button(rules, text="Close", command=closerules)
