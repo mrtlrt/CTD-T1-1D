@@ -73,6 +73,8 @@ def main():
     lives = 5
     score = 0
     name = "foobar"
+    chosen_city = "foobar"
+    country_list = ["foobar", "foobar", "foobar"]
 
     #* Welcome popup
 
@@ -138,13 +140,25 @@ def main():
         life_count.configure(text=f"Lives: {lives}")
 
     life_count = tk.Label(game, text=f"Lives: {lives}")
-    life_count.grid(row=0, column=0, padx=2, pady=2)
+    life_count.grid(row=97, column=0, padx=2, pady=2)
 
     score_count = tk.Label(game, text=f"Score: {score}")
-    score_count.grid(row=1, column=0, padx=2, pady=2)
+    score_count.grid(row=98, column=0, padx=2, pady=2)
 
-    player_name = tk.Label(game, text=f"Name: Error")
-    player_name.grid(row=2, column=0, padx=2, pady=2)
+    player_name = tk.Label(game, text=f"Name: {name}")
+    player_name.grid(row=99, column=0, padx=2, pady=2)
+
+    given_city = tk.Label(game, text=f"City: {chosen_city}") #todo obtain from random city choice
+    given_city.grid(row=0, column=2, padx=60, pady=30)
+
+    guess_1 = tk.Button(game, text=f"{country_list[0]}") #todo obtain from country list
+    guess_1.grid(row=1, column=1, padx=10, pady=20)
+
+    guess_2 = tk.Button(game, text=f"{country_list[1]}")
+    guess_2.grid(row=1, column=2, padx=10, pady=20)
+
+    guess_3 = tk.Button(game, text=f"{country_list[2]}")
+    guess_3.grid(row=1, column=3, padx=10, pady=20)
 
     #debug
     # add_score = tk.Button(game, text="+1 to score", command=lambda *args:plusscore(score))
