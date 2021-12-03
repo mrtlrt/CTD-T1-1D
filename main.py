@@ -1,38 +1,6 @@
 import tkinter as tk
 import random
 
-def write_to_txt(name, score):
-    scores_dict = {}
-    dict_string = ""
-    
-    #Reads file and places values into dictionary
-    file = open("scores.txt",'r+')
-    for player in file:
-        key, value = player.split()
-        scores_dict[key] = value
-    file.close()
-    
-    #Opens and clears file, then places new list of values inside
-    fileW = open("scores.txt",'w')
-    for key in scores_dict:
-        if(name == key):
-            scores_dict[key] = score
-        dict_string = dict_string + key + " " + str(scores_dict[key]) + "\n"
-    fileW.write(dict_string)
-    file.close()
-
-#Instead of reading a bunch of Highscores, why not just take the highest score out of everyone
-def read_highscore():
-    scores_dict = {}
-    file = open("scores.txt",'r+')
-    for player in file:
-        key, value = player.split()
-        scores_dict[key] = value
-    file.close()
-    
-    max_key = max(scores_dict, key=scores_dict.get)
-    return max_key
-
 def main():
 
     screen = tk.Tk()
@@ -173,9 +141,6 @@ def main():
         nonlocal score
 
         score += 1
-        #debug
-        #print(score)
-        #debug-
         score_count.configure(text=f"Score: {score}")
 
     def minusscore():
@@ -192,6 +157,8 @@ def main():
         lives -= 1
 
         if lives <= 0:
+            build_scorefile(name, score)
+            build_highscore()
             game.withdraw()
             gameover.deiconify()
 
@@ -267,6 +234,76 @@ def main():
     exitgame.grid(row=99, column=99)
 
     #* Game Over
+    
+    def build_scorefile(name, score):
+
+        file_dict = {}
+        dict_string = ""
+        
+        with open("scores.txt",'r') as file:
+
+            read = file.read()
+            parse_read = read.strip()
+            read_list = parse_read.split("\n")
+
+            if parse_read != "":
+                for player in read_list:
+                    key, value = player.split()
+                    file_dict[key] = value
+
+            if name not in file_dict:
+                file_dict[name] = score
+            
+            file.close()
+
+        with open("scores.txt",'w') as wfile:
+
+            for key in file_dict:
+                if (name == key) and (int(file_dict[key]) < score):
+                    file_dict[key] = score
+                dict_string = dict_string + key + " " + str(file_dict[key]) + "\n"
+
+            wfile.write(dict_string)
+            wfile.close()
+
+    def build_highscore():
+
+        hs_dict = {}
+        highscores = []
+
+        with open("scores.txt",'r') as file:
+
+            read = file.read()
+            parse_read = read.strip()
+            read_list = parse_read.split("\n")
+
+            if parse_read != "":
+                for player in read_list:
+                    key, value = player.split()
+                    hs_dict[key] = value
+
+            file.close()
+        
+        scorelist = sorted(hs_dict.values(), reverse=True)
+
+        if len(scorelist) < 3:
+            num_scores = len(scorelist)
+        else:
+            num_scores = 3
+
+        for i in range(num_scores):
+            for n in hs_dict:
+                if hs_dict[n] == scorelist[i]:
+                    highscores.append(f"{n}: {scorelist[i]}")
+
+        if num_scores > 0:
+            highscore_0.configure(text=highscores[0])
+        
+        if num_scores > 1:
+            highscore_1.configure(text=highscores[1])
+        
+        if num_scores > 2:
+            highscore_2.configure(text=highscores[2])
 
     def replay():
         global quitgame
@@ -281,6 +318,18 @@ def main():
 
     exitgameover = tk.Button(gameover, text="Exit", command=quit)
     exitgameover.grid(row=1, column=1)
+
+    highscore_title = tk.Label(gameover, text="Highscores", relief="ridge")
+    highscore_title.grid(row=2, column=0, columnspan=2, padx=20, pady=50)
+
+    highscore_0 = tk.Label(gameover, text="")
+    highscore_0.grid(row=97, column=0, columnspan=2)
+
+    highscore_1 = tk.Label(gameover, text="")
+    highscore_1.grid(row=98, column=0, columnspan=2)
+
+    highscore_2 = tk.Label(gameover, text="")
+    highscore_2.grid(row=99, column=0, columnspan=2)
 
     screen.mainloop()
 
