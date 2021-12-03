@@ -55,6 +55,7 @@ def main():
     name = "foobar"
     answer_country = "foobar"
     option_list = ["foobar", "foobar", "foobar"]
+    question_city = "foobar"
 
     countries_cities = {
             
@@ -111,19 +112,22 @@ def main():
     nameblank.grid(row=2, column=0, padx=20, pady=1)
 
     def start_game():
+
         nonlocal name
+
         name = get_name.get()
         player_name.configure(text=f"Name: {name}")
         score_count.configure(text=f"Score: {score}")
         life_count.configure(text=f"Lives: {lives}")
         create_options()
-        #debug print(name)
         game.deiconify()
         rules.deiconify()
         welcome.withdraw()
 
     def quit():
+
         global quitgame
+
         quitgame = True
         screen.destroy()
         
@@ -136,12 +140,14 @@ def main():
     #* Rules Window
 
     def openrules():
+
         rules.deiconify()
 
     def closerules():
+
         rules.withdraw()
 
-    rule = tk.Label(rules, text="Welcome to Around the World!\n\nIn this game, you will be given a city name; guess the country it belongs to and earn points, get it wrong and lose lives.\nAfter choosing the country it belongs to, tell us if it is its capital or not to earn bonus points!)")
+    rule = tk.Label(rules, text="Welcome to Around the World!\n\nIn this game, you will be given a city name; guess the country it belongs to and earn points, get it wrong and lose lives.\n\n\nBonus: For every correct answer, tell us if it is a capital city to double or lose your point!)")
     rule.grid(row=0, column=0, padx=10, pady=20)
 
     exitrules = tk.Button(rules, text="Close", command=closerules)
@@ -149,43 +155,79 @@ def main():
     #* Game start
 
     def create_options():
+
         nonlocal option_list
         nonlocal answer_country
+        nonlocal question_city
+
         option_list = random.sample(sorted(countries_cities), 3)
         answer_country = random.choice(option_list)
         question_city = random.choice(countries_cities[answer_country])
         given_city.configure(text=f"City: {question_city}")
-        guess_0.configure(text=f"{option_list[0]}")
-        guess_1.configure(text=f"{option_list[1]}")
-        guess_2.configure(text=f"{option_list[2]}")
-
-    def check_capital(dictcapitals, country, question_city):
-        if dictcapitals[country] == question_city:
-            pass
+        guess_0.configure(text=f"{option_list[0]}", command=lambda *args:[test_answer(0)])
+        guess_1.configure(text=f"{option_list[1]}", command=lambda *args:[test_answer(1)])
+        guess_2.configure(text=f"{option_list[2]}", command=lambda *args:[test_answer(2)])
         
     def plusscore():
+
         nonlocal score
+
         score += 1
         #debug
         #print(score)
         #debug-
         score_count.configure(text=f"Score: {score}")
 
+    def minusscore():
+
+        nonlocal score
+
+        score -= 1
+        score_count.configure(text=f"Score: {score}")
+
     def minuslife():
+
         nonlocal lives
+
         lives -= 1
+
         if lives <= 0:
             game.withdraw()
             gameover.deiconify()
+
         life_count.configure(text=f"Lives: {lives}")
 
     def test_answer(idx):
+
         if answer_country == option_list[idx]:
             plusscore()
-            create_options()
+            create_capital()
         else:
             minuslife()
             create_options()
+
+    def create_capital():
+
+        given_city.configure(text=f"Is {question_city} the capital of {answer_country}?")
+        guess_0.configure(text="Yes", command=lambda *args:[test_capital(0)])
+        guess_1.configure(text="Pass", command=lambda *args:[test_capital(1)])
+        guess_2.configure(text="No", command=lambda *args:[test_capital(2)])
+
+    def test_capital(idx):
+
+        if question_city == countries_capitals[answer_country]:
+            is_capital = True
+        else:
+            is_capital = False
+
+        if (is_capital == True and idx == 0) or (is_capital == False and idx == 2):
+            plusscore()
+        elif (is_capital == False and idx == 0) or  (is_capital == True and idx == 0):
+            minusscore()
+        else:
+            pass
+
+        create_options()
 
     life_count = tk.Label(game, text=f"Lives: foobar")
     life_count.grid(row=97, column=0, padx=2, pady=2)
@@ -199,13 +241,13 @@ def main():
     given_city = tk.Label(game, text=f"City: foobar")
     given_city.grid(row=0, column=2, padx=60, pady=30)
 
-    guess_0 = tk.Button(game, text=f"foobar", command=lambda *args:[test_answer(0)])
+    guess_0 = tk.Button(game, text=f"foobar")
     guess_0.grid(row=1, column=1, padx=10, pady=20)
 
-    guess_1 = tk.Button(game, text=f"foobar", command=lambda *args:[test_answer(1)])
+    guess_1 = tk.Button(game, text=f"foobar")
     guess_1.grid(row=1, column=2, padx=10, pady=20)
 
-    guess_2 = tk.Button(game, text=f"foobar", command=lambda *args:[test_answer(2)])
+    guess_2 = tk.Button(game, text=f"foobar")
     guess_2.grid(row=1, column=3, padx=10, pady=20)
 
     #debug
