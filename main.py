@@ -1,83 +1,6 @@
 import tkinter as tk
 import random
 
-countries_and_cities = {
-        
-    "Australia": ["Melbourne", "Sydney", "Brisbane", "Perth"],
-    "Belgium": ["Brussels", "Beaumont", "Beringen", "Bree"],
-    "Canada": ["Alberta", "British Columbia", "Manitoba", "Ontario"],
-    "Denmark": ["Cophenhagen", "Aarhus", "Odense", "Aalborg"],
-    "Egypt": ["Arish", "Badr", "Cairo", "Dahab"],
-    "France": ["Paris", "Marseille", "Lyon", "Toulouse"],
-    "Germany": ["Berlin", "Munich", "Hamburg", "Frankfurt"],
-    "Hungary": ["Budapest", "Debrecen", "Szeged", "Miskolc"],
-    "India": ["Chennai", "Bangalore", "Delhi", "Hyderabad"],
-    "Japan": ["Tokyo", "Kyoto", "Osaka", "Hiroshima"],
-    "South Korea": ["Seoul", "Busan", "Incheon", "Daegu"],
-    "Laos": ["Vientiane", "Savannakhet", "Pakse", "Phonsavan"],
-    "Malaysia": ["George Town", "Kuala Lumpur", "Johor Bahru", "Shah Alam"],
-    "New Zealand": ["Auckland", "Christchurch", "Wellington", "Hamilton"],
-    "Poland": ["Warsaw", "Krakow", "Gdansk", "Sopot"],
-    "Russia": ["Moscow", "Saint Petersburg", "Sochi", "Kazan"]
-
-    }
-
-countries_and_capitals = {
-
-    "Australia": "Canberra", 
-    "Belgium": "Brussels", 
-    "Canada": "Ottawa", 
-    "Denmark": "Copenhagen", 
-    "Egypt": "Cairo", 
-    "France": "Paris", 
-    "Germany": "Berlin", 
-    "Hungary": "Budapest", 
-    "India": "New Delhi", 
-    "Japan": "Tokyo", 
-    "South Korea": "Seoul", 
-    "Laos": "Vientiane", 
-    "Malaysia": "Kuala Lumpur", 
-    "New Zealand": "Wellington", 
-    "Poland": "Warsaw", 
-    "Russia": "Moscow"
-    
-    }
-
-#todo: function to randomly pick 3 keys from a dictionary, then pick one key from those three keys for any length of that dictionary (no hardcoded values; should work on dictionaries with 1 or 8 or 9999 entries) - takes in DICT 1, returns one STRING chosen country, one LIST OF three STRINGS country options
-
-#todo: function to randomly choose a city from the 1st dictionary with a specified country - takes in DICT 1 and one STRING chosen country, returns one STRING chosen city
-
-#todo: function to check whether the city chosen is the capital of the country specified or not - takes in DICT 2 and two STRINGS chosen country and chosen city, if chosen city is capital returns one BOOLEAN TRUE, otherwise FALSE
-
-#todo: function to import a DICTIONARY from an external [scores.txt], then append an INTEGER to a LIST IN THE DICTIONARY where key = STRING player name, values = LIST of INTEGER previous scores - takes in one STRING playername, one INT score, writes to external file [scores.txt]
-
-#todo: function to read a DICTIONARY from an external [scores.txt], then with the player name as a key, retrive the values of their highscores and check if the latest score is a highscore - takes in one STRING playername, one INT score, returns 1 LIST OF 3 INT SORTED highscores and if score is highscore returns one BOOLEAN TRUE, otherwise FALSE
-
-def pick_3_cities(countries_and_cities):
-    check_list = []
-    length_dict = len(countries_and_cities)
-    ran_int = 0
-    
-    country_to_choose = random.choice(list(countries_and_cities))
-    length_choices = len(country_to_choose)
-    ran_int = random.sample(range(length_choices), 3)
-
-    for i in range(len(ran_int)):
-        check_list.append(countries_and_cities[country_to_choose][i])
-        
-        
-    return country_to_choose, check_list
-
-def random_1_capital(countries_and_cities, country):
-    capital = random.choice(countries_and_cities[country])
-    return capital
-
-def check_if_capital(countries_and_capitals, country, city):
-    if(countries_and_capitals[country] == city):
-        return True
-    else:
-        return False
-
 def write_to_txt(name, score):
     scores_dict = {}
     dict_string = ""
@@ -130,8 +53,50 @@ def main():
     lives = 5
     score = 0
     name = "foobar"
-    chosen_city = "foobar"
-    country_list = ["foobar", "foobar", "foobar"]
+    answer_country = "foobar"
+    option_list = ["foobar", "foobar", "foobar"]
+
+    countries_cities = {
+            
+        "Australia": ["Melbourne", "Sydney", "Brisbane", "Perth"],
+        "Belgium": ["Brussels", "Beaumont", "Beringen", "Bree"],
+        "Canada": ["Alberta", "British Columbia", "Manitoba", "Ontario"],
+        "Denmark": ["Cophenhagen", "Aarhus", "Odense", "Aalborg"],
+        "Egypt": ["Arish", "Badr", "Cairo", "Dahab"],
+        "France": ["Paris", "Marseille", "Lyon", "Toulouse"],
+        "Germany": ["Berlin", "Munich", "Hamburg", "Frankfurt"],
+        "Hungary": ["Budapest", "Debrecen", "Szeged", "Miskolc"],
+        "India": ["Chennai", "Bangalore", "Delhi", "Hyderabad"],
+        "Japan": ["Tokyo", "Kyoto", "Osaka", "Hiroshima"],
+        "South Korea": ["Seoul", "Busan", "Incheon", "Daegu"],
+        "Laos": ["Vientiane", "Savannakhet", "Pakse", "Phonsavan"],
+        "Malaysia": ["George Town", "Kuala Lumpur", "Johor Bahru", "Shah Alam"],
+        "New Zealand": ["Auckland", "Christchurch", "Wellington", "Hamilton"],
+        "Poland": ["Warsaw", "Krakow", "Gdansk", "Sopot"],
+        "Russia": ["Moscow", "Saint Petersburg", "Sochi", "Kazan"]
+
+        }
+
+    countries_capitals = {
+
+        "Australia": "Canberra", 
+        "Belgium": "Brussels", 
+        "Canada": "Ottawa", 
+        "Denmark": "Copenhagen", 
+        "Egypt": "Cairo", 
+        "France": "Paris", 
+        "Germany": "Berlin", 
+        "Hungary": "Budapest", 
+        "India": "New Delhi", 
+        "Japan": "Tokyo", 
+        "South Korea": "Seoul", 
+        "Laos": "Vientiane", 
+        "Malaysia": "Kuala Lumpur", 
+        "New Zealand": "Wellington", 
+        "Poland": "Warsaw", 
+        "Russia": "Moscow"
+        
+        }
 
     #* Welcome popup
 
@@ -149,6 +114,9 @@ def main():
         nonlocal name
         name = get_name.get()
         player_name.configure(text=f"Name: {name}")
+        score_count.configure(text=f"Score: {score}")
+        life_count.configure(text=f"Lives: {lives}")
+        create_options()
         #debug print(name)
         game.deiconify()
         rules.deiconify()
@@ -180,42 +148,65 @@ def main():
     exitrules.grid(row=1, column=0, padx=10, pady=10)
     #* Game start
 
-    def plusscore(i):
+    def create_options():
+        nonlocal option_list
+        nonlocal answer_country
+        option_list = random.sample(sorted(countries_cities), 3)
+        answer_country = random.choice(option_list)
+        question_city = random.choice(countries_cities[answer_country])
+        given_city.configure(text=f"City: {question_city}")
+        guess_0.configure(text=f"{option_list[0]}")
+        guess_1.configure(text=f"{option_list[1]}")
+        guess_2.configure(text=f"{option_list[2]}")
+
+    def check_capital(dictcapitals, country, question_city):
+        if dictcapitals[country] == question_city:
+            pass
+        
+    def plusscore():
         nonlocal score
-        score = i + 1
+        score += 1
         #debug
         #print(score)
         #debug-
         score_count.configure(text=f"Score: {score}")
 
-    def minuslife(i):
+    def minuslife():
         nonlocal lives
-        lives = i - 1
+        lives -= 1
         if lives <= 0:
             game.withdraw()
             gameover.deiconify()
         life_count.configure(text=f"Lives: {lives}")
 
-    life_count = tk.Label(game, text=f"Lives: {lives}")
+    def test_answer(idx):
+        if answer_country == option_list[idx]:
+            plusscore()
+            create_options()
+        else:
+            minuslife()
+            create_options()
+
+    life_count = tk.Label(game, text=f"Lives: foobar")
     life_count.grid(row=97, column=0, padx=2, pady=2)
 
-    score_count = tk.Label(game, text=f"Score: {score}")
+    score_count = tk.Label(game, text=f"Score: foobar")
     score_count.grid(row=98, column=0, padx=2, pady=2)
 
-    player_name = tk.Label(game, text=f"Name: {name}")
+    player_name = tk.Label(game, text=f"Name: foobar")
     player_name.grid(row=99, column=0, padx=2, pady=2)
 
-    given_city = tk.Label(game, text=f"City: {chosen_city}") #todo obtain from random city choice
+    given_city = tk.Label(game, text=f"City: foobar")
     given_city.grid(row=0, column=2, padx=60, pady=30)
 
-    guess_1 = tk.Button(game, text=f"{country_list[0]}") #todo obtain from country list
-    guess_1.grid(row=1, column=1, padx=10, pady=20)
+    guess_0 = tk.Button(game, text=f"foobar", command=lambda *args:[test_answer(0)])
+    guess_0.grid(row=1, column=1, padx=10, pady=20)
 
-    guess_2 = tk.Button(game, text=f"{country_list[1]}")
-    guess_2.grid(row=1, column=2, padx=10, pady=20)
+    guess_1 = tk.Button(game, text=f"foobar", command=lambda *args:[test_answer(1)])
+    guess_1.grid(row=1, column=2, padx=10, pady=20)
 
-    guess_3 = tk.Button(game, text=f"{country_list[2]}")
-    guess_3.grid(row=1, column=3, padx=10, pady=20)
+    guess_2 = tk.Button(game, text=f"foobar", command=lambda *args:[test_answer(2)])
+    guess_2.grid(row=1, column=3, padx=10, pady=20)
 
     #debug
     # add_score = tk.Button(game, text="+1 to score", command=lambda *args:plusscore(score))
