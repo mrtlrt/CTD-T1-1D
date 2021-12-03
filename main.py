@@ -53,6 +53,63 @@ countries_and_capitals = {
 
 #todo: function to read a DICTIONARY from an external [scores.txt], then with the player name as a key, retrive the values of their highscores and check if the latest score is a highscore - takes in one STRING playername, one INT score, returns 1 LIST OF 3 INT SORTED highscores and if score is highscore returns one BOOLEAN TRUE, otherwise FALSE
 
+def pick_3_cities(countries_and_cities):
+    check_list = []
+    length_dict = len(countries_and_cities)
+    ran_int = 0
+    
+    country_to_choose = random.choice(list(countries_and_cities))
+    length_choices = len(country_to_choose)
+    ran_int = random.sample(range(length_choices), 3)
+
+    for i in range(len(ran_int)):
+        check_list.append(countries_and_cities[country_to_choose][i])
+        
+        
+    return country_to_choose, check_list
+
+def random_1_capital(countries_and_cities, country):
+    capital = random.choice(countries_and_cities[country])
+    return capital
+
+def check_if_capital(countries_and_capitals, country, city):
+    if(countries_and_capitals[country] == city):
+        return True
+    else:
+        return False
+
+def write_to_txt(name, score):
+    scores_dict = {}
+    dict_string = ""
+    
+    #Reads file and places values into dictionary
+    file = open("scores.txt",'r+')
+    for player in file:
+        key, value = player.split()
+        scores_dict[key] = value
+    file.close()
+    
+    #Opens and clears file, then places new list of values inside
+    fileW = open("scores.txt",'w')
+    for key in scores_dict:
+        if(name == key):
+            scores_dict[key] = score
+        dict_string = dict_string + key + " " + str(scores_dict[key]) + "\n"
+    fileW.write(dict_string)
+    file.close()
+
+#Instead of reading a bunch of Highscores, why not just take the highest score out of everyone
+def read_highscore():
+    scores_dict = {}
+    file = open("scores.txt",'r+')
+    for player in file:
+        key, value = player.split()
+        scores_dict[key] = value
+    file.close()
+    
+    max_key = max(scores_dict, key=scores_dict.get)
+    return max_key
+
 def main():
 
     screen = tk.Tk()
