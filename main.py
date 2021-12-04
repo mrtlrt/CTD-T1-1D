@@ -189,7 +189,7 @@ def main():
 
         if (is_capital == True and idx == 0) or (is_capital == False and idx == 2):
             plusscore()
-        elif (is_capital == False and idx == 0) or  (is_capital == True and idx == 0):
+        elif (is_capital == False and idx == 0) or  (is_capital == True and idx == 2):
             minusscore()
         else:
             pass
