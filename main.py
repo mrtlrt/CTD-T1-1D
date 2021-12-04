@@ -84,6 +84,7 @@ def main():
         nonlocal name
 
         name = get_name.get()
+        name = name.strip()
         player_name.configure(text=f"Name: {name}")
         score_count.configure(text=f"Score: {score}")
         life_count.configure(text=f"Lives: {lives}")
@@ -115,11 +116,12 @@ def main():
 
         rules.withdraw()
 
-    rule = tk.Label(rules, text="Welcome to Around the World!\n\nIn this game, you will be given a city name; guess the country it belongs to and earn points, get it wrong and lose lives.\n\n\nBonus: For every correct answer, tell us if it is a capital city to double or lose your point!)")
+    rule = tk.Label(rules, text="Welcome to Around the World!\n\nIn this game, you will be given a city name; guess the country it belongs to and earn points, get it wrong and lose lives.\n\n\nBonus: For every correct answer, tell us if it is a capital city to double or lose your point!")
     rule.grid(row=0, column=0, padx=10, pady=20)
 
     exitrules = tk.Button(rules, text="Close", command=closerules)
     exitrules.grid(row=1, column=0, padx=10, pady=10)
+
     #* Game start
 
     def create_options():
@@ -247,24 +249,29 @@ def main():
             read_list = parse_read.split("\n")
 
             if parse_read != "":
-                for player in read_list:
-                    key, value = player.split()
-                    file_dict[key] = value
+                for entry in read_list:
+                    score_string = ""
+                    tick = -1
+                    while score_string.isdigit() or (score_string == ""):
+                        score_string = entry[tick:]
+                        tick -= 1
+                    player = entry.replace(score_string, "")
+                    player = player.strip()
+                    file_dict[player] = score_string.strip()
 
             if name not in file_dict:
                 file_dict[name] = score
-            
-            file.close()
 
-        with open("scores.txt",'w') as wfile:
+        with open("scores.txt",'r+') as wfile:
 
             for key in file_dict:
                 if (name == key) and (int(file_dict[key]) < score):
                     file_dict[key] = score
                 dict_string = dict_string + key + " " + str(file_dict[key]) + "\n"
 
+            wfile.seek(0)
             wfile.write(dict_string)
-            wfile.close()
+            wfile.truncate()
 
     def build_highscore():
 
@@ -278,12 +285,16 @@ def main():
             read_list = parse_read.split("\n")
 
             if parse_read != "":
-                for player in read_list:
-                    key, value = player.split()
-                    hs_dict[key] = value
-
-            file.close()
-        
+                for entry in read_list:
+                    score_string = ""
+                    tick = -1
+                    while score_string.isdigit() or (score_string == ""):
+                        score_string = entry[tick:]
+                        tick -= 1
+                    player = entry.replace(score_string, "")
+                    player = player.strip()
+                    hs_dict[player] = score_string.strip()
+                    
         scorelist = sorted(hs_dict.values(), reverse=True)
 
         if len(scorelist) < 3:
