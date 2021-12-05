@@ -1,5 +1,10 @@
 import tkinter as tk
 import random
+import os
+
+localpath = os.path.dirname(os.path.abspath(__file__))
+scorefile = os.path.join(localpath, "scores.txt")
+open(scorefile,"a").close()
 
 def main():
 
@@ -241,8 +246,8 @@ def main():
 
         file_dict = {}
         dict_string = ""
-        
-        with open("scores.txt",'r') as file:
+
+        with open(scorefile,'r') as file:
 
             read = file.read()
             parse_read = read.strip()
@@ -262,7 +267,7 @@ def main():
             if name not in file_dict:
                 file_dict[name] = score
 
-        with open("scores.txt",'r+') as wfile:
+        with open(scorefile,'r+') as wfile:
 
             for key in file_dict:
                 if (name == key) and (int(file_dict[key]) < score):
@@ -278,7 +283,7 @@ def main():
         hs_dict = {}
         highscores = []
 
-        with open("scores.txt",'r') as file:
+        with open(scorefile,'r') as file:
 
             read = file.read()
             parse_read = read.strip()
